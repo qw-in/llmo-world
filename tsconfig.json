@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		// https://nodejs.org/api/typescript.html?utm_source=chatgpt.com#type-stripping
+		"noEmit": true, // Optional - see note below
+		"target": "esnext",
+		"module": "nodenext",
+		"rewriteRelativeImportExtensions": true,
+		"erasableSyntaxOnly": true,
+		"verbatimModuleSyntax": true
+	}
+}

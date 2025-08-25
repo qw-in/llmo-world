@@ -1,0 +1,5 @@
+{
+	"$schema": "../schema.json",
+	"name": "HTML div tag",
+	"description": "Tests if the agent can access the contents of a statically rendered `div` tag in the body."
+}

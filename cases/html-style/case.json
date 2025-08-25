@@ -1,0 +1,5 @@
+{
+	"$schema": "../schema.json",
+	"name": "HTML style tag",
+	"description": "Tests if the agent can access the contents of a statically rendered `style` tag in the body."
+}

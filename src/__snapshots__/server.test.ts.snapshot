@@ -1,0 +1,7 @@
+exports[`Server > should 404 for invalid pages 1`] = `
+"404 Not Found"
+`;
+
+exports[`Server > should return a permissive robots.txt 1`] = `
+"User-agent: *\\nAllow: /\\n"
+`;

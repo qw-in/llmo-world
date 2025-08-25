@@ -1,0 +1,5 @@
+{
+	"$schema": "../schema.json",
+	"name": "HTML pre tag",
+	"description": "Tests if the agent can access the contents of a statically rendered `pre` tag in the body."
+}

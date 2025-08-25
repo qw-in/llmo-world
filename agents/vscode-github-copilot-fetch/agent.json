@@ -1,0 +1,6 @@
+{
+	"$schema": "../schema.json",
+	"name": "VSCode GitHub Copilot #fetch",
+	"description": "",
+	"url": "https://github.com/copilot"
+}

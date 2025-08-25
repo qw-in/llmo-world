@@ -1,0 +1,13 @@
+{
+	"$id": "https://example.com/schemas/case.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Case definition",
+	"type": "object",
+	"required": ["$schema", "name", "description"],
+	"properties": {
+		"$schema": { "type": "string" },
+		"name": { "type": "string" },
+		"description": { "type": "string" }
+	},
+	"additionalProperties": false
+}

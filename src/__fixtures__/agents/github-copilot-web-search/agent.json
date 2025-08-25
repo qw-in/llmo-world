@@ -1,0 +1,6 @@
+{
+	"$schema": "../schema.json",
+	"name": "GitHub Copilot (Web) Search",
+	"description": "",
+	"url": "https://github.com/copilot"
+}

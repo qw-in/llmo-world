@@ -1,0 +1,16 @@
+exports[`agentsLoad > should load all valid agents 1`] = `
+[
+  {
+    "id": "openai-chatgpt-search",
+    "name": "OpenAI ChatGPT Search",
+    "description": "",
+    "directory": "file:///workspaces/llmo-world/src/__fixtures__/agents/openai-chatgpt-search/"
+  },
+  {
+    "id": "github-copilot-web-search",
+    "name": "GitHub Copilot (Web) Search",
+    "description": "",
+    "directory": "file:///workspaces/llmo-world/src/__fixtures__/agents/github-copilot-web-search/"
+  }
+]
+`;

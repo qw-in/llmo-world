@@ -1,0 +1,3 @@
+exports[`CaseServer > should return a permissive /robots.txt 1`] = `
+"User-agent: *\\nAllow: /\\n"
+`;

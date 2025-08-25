@@ -1,0 +1,5 @@
+{
+	"$schema": "../../../../cases/schema.json",
+	"name": "HTML code tag",
+	"description": "Tests if the agent can access the contents of a statically rendered `code` tag in the body."
+}

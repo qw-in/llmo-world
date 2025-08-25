@@ -1,0 +1,6 @@
+{
+	"$schema": "../schema.json",
+	"name": "OpenAI ChatGPT Search",
+	"description": "",
+	"url": "https://chatgpt.com/?temporary-chat=true&model=gpt-5"
+}

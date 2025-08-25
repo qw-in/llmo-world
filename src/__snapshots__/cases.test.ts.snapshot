@@ -1,0 +1,16 @@
+exports[`casesLoad > should load all valid cases 1`] = `
+[
+  {
+    "id": "html-div",
+    "name": "HTML div tag",
+    "description": "Tests if the agent can access the contents of a statically rendered \`div\` tag in the body.",
+    "directory": "file:///workspaces/llmo-world/src/__fixtures__/cases/html-div/"
+  },
+  {
+    "id": "html-code",
+    "name": "HTML code tag",
+    "description": "Tests if the agent can access the contents of a statically rendered \`code\` tag in the body.",
+    "directory": "file:///workspaces/llmo-world/src/__fixtures__/cases/html-code/"
+  }
+]
+`;
