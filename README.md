@@ -3,7 +3,7 @@
 > 👋 Arcjet folks! Thanks for having a look! This is not an
 > Arcjet engineering project & likely won't become one. It
 > is currently under the Arcjet org but David will decide
-> on it's future home after the demo on Thursday.
+> on its future home after the demo on Thursday.
 >
 > For this reason I will _not_ be following our engineering
 > workflow. I won't be requesting formal reviews or
@@ -34,7 +34,7 @@ So far we've only scratched the surface but neither ChatGPT search not GitHub
 copilot `#fetch` seem to be able to see content in `<script>` or `<style>` tags.
 The test cases are not in `main` yet but it is also very likely they don't
 executre JavaScript. Oh, and Copilot (web) seems to be unable to fetch live
-URLs. Intead relying on Bings existing cached version
+URLs. Instead relying on Bings existing cached version
 
 ## Using the CLI
 
