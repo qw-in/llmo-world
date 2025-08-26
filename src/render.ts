@@ -27,6 +27,17 @@ liquid.registerTag("llorem", {
 	},
 });
 
+/**
+ * LiquidJS doesn't have a built-in filter for base64 encoding so we define one
+ * @see https://shopify.dev/docs/api/liquid/filters/base64_encode
+ */
+liquid.registerFilter("base64_encode", (value) => {
+	if (typeof value !== "string") {
+		throw new Error("base64_encode filter only supports string values");
+	}
+	return globalThis.btoa(value);
+});
+
 type RenderTemplateOptions = {
 	template: string;
 	variables?: Record<string, string>;

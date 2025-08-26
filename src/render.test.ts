@@ -42,7 +42,7 @@ describe("renderTemplate", () => {
 		});
 	});
 
-	describe("{% llorem %} tag", () => {
+	describe("llorem tag", () => {
 		it("should render the default number of words", async (ctx: TestContext) => {
 			const result = await render({
 				template: "{% llorem %}",
@@ -57,6 +57,31 @@ describe("renderTemplate", () => {
 			});
 			const words = result.split(" ");
 			ctx.assert.equal(words.length, 5);
+		});
+	});
+
+	describe("base64_encode filter", () => {
+		it("should base64 encode a string literal", async (ctx: TestContext) => {
+			const result = await render({
+				template: `{{ 'hello world!' | base64_encode }}`,
+			});
+			ctx.assert.equal(globalThis.atob(result), "hello world!");
+		});
+
+		it("should base64 encode a string variable", async (ctx: TestContext) => {
+			const result = await render({
+				template: `{{ var | base64_encode }}`,
+				variables: { var: "hello world!" },
+			});
+			ctx.assert.equal(globalThis.atob(result), "hello world!");
+		});
+
+		it("should throw for non-string values", async (ctx: TestContext) => {
+			ctx.assert.rejects(async () => {
+				await render({
+					template: `{{ 123 | base64_encode }}`,
+				});
+			});
 		});
 	});
 });
