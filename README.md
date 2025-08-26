@@ -1,3 +1,14 @@
+> [!NOTE]
+>
+> 👋 Arcjet folks! Thanks for having a look! This is not an
+> Arcjet engineering project & likely won't become one. It
+> is currently under the Arcjet org but David will decide
+> on it's future home after the demo on Thursday.
+>
+> For this reason I will _not_ be following our engineering
+> workflow. I won't be requesting formal reviews or
+> attaching work to projects as this is currently.
+
 # LLMo World
 
 > [!CAUTION]
