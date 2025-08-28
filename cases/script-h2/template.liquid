@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>LLMo World</title>
+    <meta name="robots" content="index,follow">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var el = document.createElement("h2");
+            el.textContent = atob("{{ test | base64_encode }}");
+            document.body.appendChild(el);
+        });
+    </script>
+  </head>
+
+  <body>
+    <main>
+      <h1>LLMo World</h1>
+      <p>{% llorem 10 %}</p>
+      <p>{% llorem 3 %} {{ control }} {% llorem 4 %}</p>
+      <p>{% llorem 8 %}</p>
+    </main>
+  </body>
+</html>

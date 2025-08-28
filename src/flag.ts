@@ -7,7 +7,7 @@ function shortId(): string {
 	return webcrypto.randomUUID().substring(0, 8);
 }
 
-type Flag = `flag_${string}`;
+export type Flag = `flag_${string}`;
 
 type TupleOf<
 	TValue,

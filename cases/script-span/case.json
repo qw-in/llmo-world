@@ -1,0 +1,5 @@
+{
+	"$schema": "../schema.json",
+	"name": "JavaScript injected span",
+	"description": "Tests if the agent can access the contents of a span injected via JavaScript."
+}

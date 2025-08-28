@@ -1,0 +1,5 @@
+{
+	"$schema": "../schema.json",
+	"name": "Inline style display none",
+	"description": "Tests if the agent can view content that is display: none."
+}
