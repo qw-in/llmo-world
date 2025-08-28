@@ -2,9 +2,6 @@ import { type ServerType, serve } from "@hono/node-server";
 import { defineCommand } from "citty";
 import consola from "consola";
 import { Hono } from "hono";
-import { webcrypto } from "node:crypto";
-import { writeFile } from "node:fs/promises";
-import path from "node:path";
 
 import { agentsLoad, loadPromptTemplateForAgent } from "../agents.ts";
 import { CaseServer } from "../case-server.ts";
@@ -12,25 +9,11 @@ import { casesLoad, loadTemplateForCase } from "../cases.ts";
 import { generateFlags } from "../flag.ts";
 import { MatrixScheduler } from "../matrix-scheduler.ts";
 import { render } from "../render.ts";
+import { Reporter } from "../reporter.ts";
 
 const log = consola.withTag("cli");
 
 let server: ServerType | null = null;
-
-type TempResult = {
-	executionId: string;
-	agent: string;
-	case: string;
-	prompt: string;
-	promptTemplateHash: string;
-	html: string;
-	htmlTemplateHash: string;
-	urlWasCalled: boolean;
-	controlFound: boolean;
-	testFound: boolean;
-};
-
-const tempResults: TempResult[] = [];
 
 export const runCommand = defineCommand({
 	meta: {
@@ -123,7 +106,7 @@ export const runCommand = defineCommand({
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 				continue;
 			}
-			await route.called;
+			await route.firstCall;
 			break;
 		}
 
@@ -139,6 +122,10 @@ export const runCommand = defineCommand({
 				agent: agents,
 				case: cases,
 			},
+		});
+
+		await using reporter = new Reporter({
+			consola: log,
 		});
 
 		log.info(`${cases.length} cases for ${agents.length} agents.`);
@@ -177,6 +164,18 @@ export const runCommand = defineCommand({
 				`Testing "${execution.case.name}" for "${execution.agent.name}". Paste the following prompt into a new session:\n\n${prompt}`,
 			);
 
+			await using report = reporter.beginExecution({
+				agent: execution.agent,
+				case: execution.case,
+				controlFlag: controlFlag,
+				html,
+				htmlTemplateHash: template.hash,
+				id: executionId,
+				prompt,
+				promptTemplateHash: promptTemplate.hash,
+				testFlag: testFlag,
+			});
+
 			// TODO: Some kind of skip or timeout?
 
 			const response = await elog.prompt(
@@ -189,24 +188,18 @@ export const runCommand = defineCommand({
 			const conrolNeedle = controlFlag.replace("flag_", "");
 			const testNeedle = testFlag.replace("flag_", "");
 
-			const urlWasCalled = route.wasCalled();
+			const urlWasCalled = route.calls.length > 0;
 			const controlFound = response.includes(conrolNeedle);
 			const testFound = response.includes(testNeedle);
 
-			elog.success("Response received", {
-				urlWasCalled,
+			await report.completeExecution({
+				calls: route.calls,
 				controlFound,
+				message: response,
 				testFound,
 			});
 
-			tempResults.push({
-				executionId,
-				agent: execution.agent.id,
-				case: execution.case.id,
-				prompt,
-				promptTemplateHash: promptTemplate.hash,
-				html,
-				htmlTemplateHash: template.hash,
+			elog.success("Response received", {
 				urlWasCalled,
 				controlFound,
 				testFound,
@@ -214,14 +207,6 @@ export const runCommand = defineCommand({
 		}
 	},
 	async cleanup() {
-		const fileName = `results-${webcrypto.randomUUID().slice(0, 8)}.json`;
-		log.info(`Writing temporary results to "./${fileName}"`);
-		await writeFile(
-			path.join(process.cwd(), fileName),
-			JSON.stringify(tempResults, null, 2),
-			"utf-8",
-		);
-
 		if (server) {
 			server.close();
 			log.info("Shut down the server.");

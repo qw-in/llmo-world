@@ -1,6 +1,6 @@
-import { describe, it, type TestContext } from "node:test";
 import { createConsola } from "consola";
 import { Hono } from "hono";
+import { describe, it, type TestContext } from "node:test";
 import { CaseServer } from "./case-server.ts";
 
 describe("CaseServer", () => {
@@ -45,7 +45,7 @@ describe("CaseServer", () => {
 			const inpect = (() => {
 				let state: "pending" | "resolved" | "rejected" = "pending";
 
-				route.called.then(
+				route.firstCall.then(
 					() => {
 						state = "resolved";
 					},
@@ -63,12 +63,31 @@ describe("CaseServer", () => {
 
 			ctx.assert.equal(inpect.state, "pending");
 
-			const response = await app.request(path);
+			const response = await app.request(path, {
+				headers: {
+					"X-Custom-Header": "value",
+				},
+			});
 
 			ctx.assert.equal(response.status, 200);
 			ctx.assert.equal(await response.text(), html);
 
-			// ctx.assert.equal(inpect.state, "resolved");
+			ctx.assert.equal(inpect.state, "resolved");
+			ctx.assert.deepEqual(
+				route.calls.map((c) => ({
+					...c,
+					receivedAt: null,
+				})),
+				[
+					{
+						headers: {
+							"x-custom-header": "value",
+						},
+						receivedAt: null,
+						url: "http://localhost/test",
+					},
+				],
+			);
 		}
 
 		const postResponse = await app.request(path);

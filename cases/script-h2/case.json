@@ -1,0 +1,5 @@
+{
+	"$schema": "../schema.json",
+	"name": "JavaScript injected h2",
+	"description": "Tests if the agent can access the contents of an h2 heading injected via JavaScript."
+}
