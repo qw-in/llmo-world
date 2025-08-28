@@ -1,14 +1,3 @@
-> [!NOTE]
->
-> 👋 Arcjet folks! Thanks for having a look! This is not an
-> Arcjet engineering project & likely won't become one. It
-> is currently under the Arcjet org but David will decide
-> on its future home after the demo on Thursday.
->
-> For this reason I will _not_ be following our engineering
-> workflow. I won't be requesting formal reviews or
-> attaching work to projects as this is currently.
-
 # LLMo World
 
 > [!CAUTION]
@@ -16,8 +5,19 @@
 > This project is still in the experimental phase. Everything is subject to
 > change. Use for fun not production.
 
-LLMo World is a tool for exploring how popular LLM-based tools interact with the
+LLMo World is a tool for exploring how popular LLM-based assistants interact with the
 web.
+
+---
+
+<a href="https://arcjet.com?ref=llmo-world" target="_blank" rel="noopener noreferrer">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://arcjet.com/logo/arcjet-dark-lockup-voyage-horizontal.svg">
+    <img src="https://arcjet.com/logo/arcjet-light-lockup-voyage-horizontal.svg" alt="Arcjet Logo" height="128" width="auto">
+  </picture>
+</a>
+
+A big thanks to [Arcjet](https://arcjet.com?ref=llmo-world) for supporting my work on this project!
 
 ## How it works
 
@@ -25,16 +25,20 @@ Start a server and host an html page with some hidden flags (one control & one
 test). Then generate a prompt to search for the flags and log the results.
 Repeat for enough agents and test cases until satisfied.
 
-Everything is manual for now for maxumum flexiblity and compatibility but the
+Everything is manual for now for maximum flexibility and compatibility but the
 goal is to expand and automate where possible.
 
 ## What we've learned
 
-So far we've only scratched the surface but neither ChatGPT search not GitHub
-copilot `#fetch` seem to be able to see content in `<script>` or `<style>` tags.
-The test cases are not in `main` yet but it is also very likely they don't
-executre JavaScript. Oh, and Copilot (web) seems to be unable to fetch live
-URLs. Instead relying on Bings existing cached version
+So far this approach seems to work well!
+
+| Test category                | ChatGPT /search | Copilot #fetch |
+|------------------------------|-----------------|----------------|
+| Server‑rendered text         | ✅               | ✅              |
+| JS‑inserted content          | ❌               | ✅              |
+| Literal `<script>` contents  | ❌               | ❌              |
+| Literal `<style>` contents   | ❌               | ❌              |
+| CSS hidden (`display: none`) | ✅               | ❌              |
 
 ## Using the CLI
 
