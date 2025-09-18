@@ -63,10 +63,6 @@ export const runCommand = defineCommand({
 		}
 
 		const url = new URL(args.url);
-		if (url.protocol !== "https:") {
-			log.error("URL must be HTTPS");
-			return;
-		}
 
 		const app = new Hono();
 		const caseServer = new CaseServer({
@@ -82,7 +78,7 @@ export const runCommand = defineCommand({
 		});
 
 		log.success(`Server is running at "http://localhost:${args.port}"`);
-		log.start(`Verifying server is accessible at "${url.hostname}"...`);
+		log.start(`Verifying server is publicly accessible...`);
 
 		// It can take a moment for the server to be publicly accessible for
 		// some various reasons, so we retry a few times with a backoff.
